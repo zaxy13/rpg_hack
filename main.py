@@ -18,8 +18,8 @@ class Actor(object):
 
     def attack_chance(self):
         luck = random.random()
-        luck * 10
-        if luck <= 80:
+        luck * 10.0
+        if luck <= 80.0:
             return True
         else:
             return False
@@ -29,11 +29,17 @@ class Actor(object):
 
     def defence_chance(self):
         luck = random.random()
-        luck * 10
-        if luck <= 80:
+        luck * 10.0
+        if luck > 50.0:
             return True
         else:
             return False
+
+    def hp(self, change, add=False):
+        if add == True:
+            self.health + change
+        else:
+            self.health - change
 
     def move(self, x, y):
         new_pos = {"x":x,"y":y}
@@ -123,20 +129,22 @@ def action_attack(attacker, oppnet):
             hit_total = hit_power - defence_power
             if hit_total <= 0:
                 hit_total = 0
-            oppnet.health - hit_total
+            oppnet.hp(hit_total)
             if oppnet.health <= 0:
                 return "oppnet dead"
             else:
                 return "you hit with a force of %s hit points" % hit_total
         else:
-             hit_total = hit_power
-             if hit_total <= 0:
-                 hit_total = 0
-             oppnet.health - hit_total
-             if oppnet.health <= 0:
-                 return "oppnet dead"
-             else:
-                 return "you hit with a full force of %s hit points" % hit_total
+            hit_total = hit_power
+            if hit_total <= 0:
+                hit_total = 0
+            print oppnet.health
+            oppnet.hp(hit_total)
+            print oppnet.health
+            if oppnet.health <= 0:
+                return "oppnet dead"
+            else:
+                return "you hit with a full force of %s hit points" % hit_total
     else:
         return "ya missed...."
 
