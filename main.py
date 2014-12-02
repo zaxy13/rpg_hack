@@ -46,6 +46,9 @@ class Player(Actor):
         else:
             print "you didn't level up"
 
+    def battle(self, opponent):
+        pass
+
 class Enemy(Actor):
     def __init__(self, name, x,y):
         super(Enemy, self).__init__(name, x,y)
