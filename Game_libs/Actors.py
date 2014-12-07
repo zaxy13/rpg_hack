@@ -8,6 +8,7 @@ class Actor(object):
     def __init__(self, name):
         self.name = name
         self.level = 1
+        self.exp = 0
         self.health = 50
         self.attack_points = 10
         self.defence_points = 10
@@ -37,28 +38,44 @@ class Actor(object):
             return False
 
     def hp(self, change, add=False):
-
         if add:
             self.health += change
         else:
             self.health -= change
+
+    def exp_drop(self):
+        return (self.level * 100)
+        # todo better exp drops, maybe?
+
+    def level_up(self, exp_gain ):
+        pass
 
 
 class Player(Actor):
     def __init__(self, name):
         super(Player, self).__init__(name)
         self.gold = 100
-        self.exp = 0
         self.next_level = 100
         self.weapon = {"attack": 10, "chance": 3, "name": "basic sword"}
         # todo, make an item class, to will make objects much neater.
 
-    def level_up(self):
+    # todo add auto check ability
+
+    """
+    if experience > 50*level^2 + 50*level then inc level
+    y = 50*x^2 + 50*x
+    """
+
+
+    def level_up(self, exp_gain):
+        self.exp = self.exp + exp_gain
+
         if self.exp >= self.next_level:
             self.level += 1
             xp = self.exp - self.next_level
             self.exp = xp
-            self.next_level = self.level ** self.level
+            self.next_level = 50*self.level**2+50*self.level
+            print("yay, you leveled up!")
             # todo make better exp growth
         else:
             print("you didn't level up")
@@ -70,9 +87,7 @@ class Enemy(Actor):
         self.gold = 10
         self.loot = {}
 
-    def exp_drop(self, player_level):
-        return (self.level * 100) / player_level
-        # todo better exp drops, maybe?
+
 
 
 class NPC(Actor):

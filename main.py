@@ -25,6 +25,7 @@ def battler(attacker, defender):
                     hit_total = 0
                 defender.hp(hit_total)
                 if defender.health <= 0:
+                    attacker.level_up(defender.exp_drop())
                     return "defender dead"
                 else:
                     return "{} blocked, you hit with a force of {} hit points".format(defender.name, hit_total)
@@ -32,7 +33,9 @@ def battler(attacker, defender):
                 hit_total = hit_power
                 if hit_total <= 0:
                     hit_total = 0
+                defender.hp(hit_total)
                 if defender.health <= 0:
+                    attacker.level_up(defender.exp_drop())
                     return "defender dead"
                 else:
                     return "{} was wide open, you hit with full force, {} hit points".format(defender.name, hit_total)
@@ -42,6 +45,7 @@ def battler(attacker, defender):
         return "Can't Attack, Your dead"
     elif defender.health <= 0:
         return "Can't Attack, {} is dead".format(defender.name)
+
 
 def main():
     p = Player("bob")
