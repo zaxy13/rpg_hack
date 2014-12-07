@@ -15,7 +15,7 @@ class Room(object):
                 return "that spot already full"
             else:
                 self.objects.append(new_obj)
-                print "object added"
+                print("object added")
         # if the list is empty, the for loop will nor run.
         self.objects.append(new_obj)
-        print "first object in list"
+        print("first object in list")
