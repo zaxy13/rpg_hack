@@ -1,6 +1,7 @@
 ### start of Actor area ###
 import random
 
+
 class Actor(object):
 
     """ the base class for all game characters """
@@ -20,7 +21,6 @@ class Actor(object):
     # look in to changing both chances to just luck, then in Player subclass add bonuses.
     def attack_chance(self):
         luck = random.random() * 100.0
-        print("luck_atk", luck)
         if luck <= 80.0:
             return True
         else:
@@ -31,7 +31,6 @@ class Actor(object):
 
     def defence_chance(self):
         luck = random.random() * 100.0
-        # print("luck_def", luck)
         if luck > 50.0:
             return True
         else:
@@ -44,10 +43,13 @@ class Actor(object):
             self.health -= change
 
     def exp_drop(self):
-        return (self.level * 100)
+        return self.level * 100
         # todo better exp drops, maybe?
 
     def level_up(self, exp_gain ):
+        pass
+
+    def equip_item(self, item=None):
         pass
 
 
@@ -56,16 +58,10 @@ class Player(Actor):
         super(Player, self).__init__(name)
         self.gold = 100
         self.next_level = 100
-        self.weapon = {"attack": 10, "chance": 3, "name": "basic sword"}
+        self.weapon = None
         # todo, make an item class, to will make objects much neater.
 
     # todo add auto check ability
-
-    """
-    if experience > 50*level^2 + 50*level then inc level
-    y = 50*x^2 + 50*x
-    """
-
 
     def level_up(self, exp_gain):
         self.exp = self.exp + exp_gain
@@ -79,6 +75,15 @@ class Player(Actor):
             # todo make better exp growth
         else:
             print("you didn't level up")
+
+    def equip_item(self, kind=None, item=None):
+        if
+            pass
+        else:
+            pass
+
+
+
 
 
 class Enemy(Actor):
