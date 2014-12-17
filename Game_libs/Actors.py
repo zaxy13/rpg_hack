@@ -59,6 +59,7 @@ class Player(Actor):
         self.gold = 100
         self.next_level = 100
         self.weapon = None
+        self.armor = None
         # todo, make an item class, to will make objects much neater.
 
     # todo add auto check ability
@@ -76,11 +77,15 @@ class Player(Actor):
         else:
             print("you didn't level up")
 
-    def equip_item(self, kind=None, item=None):
-        if
-            pass
+    def equip_item(self, itemm, kind="pack"):
+        if kind != "pack":
+            if kind == "weapon":
+                self.weapon = itemm
+            elif kind == "armor":
+                self.armor = itemm
+
         else:
-            pass
+            return "item add fail"
 
 
 
@@ -97,4 +102,11 @@ class Enemy(Actor):
 
 class NPC(Actor):
     pass
-### end of Actor area ###
+
+def emaker(names):
+    e = {}
+    x = 0
+    for name in names:
+        e["e{}".format(x)] = Enemy(name)
+        x += 1
+    return e

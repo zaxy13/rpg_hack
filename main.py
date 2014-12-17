@@ -1,5 +1,5 @@
 
-from Game_libs.Actors import Player, Enemy, NPC
+from Game_libs.Actors import Player, Enemy, emaker
 # I'm going a different direction for now
 # from Game_libs.Rooms import Room
 
@@ -47,11 +47,16 @@ def battler(attacker, defender):
         return "Can't Attack, {} is dead".format(defender.name)
 
 
+def fight():
+
+
 def main():
-    p = Player("bob")
-    e = Enemy("Troll")
-    battler(p, e)
-    print("done")
+    n = [str(x) for x in range(10)]
+    op = emaker(n)
+    you = Player("zaxy")
+    for key in op:
+        print(battler(you, op[key]))
+
 
 
 if __name__ == '__main__':
