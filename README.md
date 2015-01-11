@@ -2,7 +2,7 @@ Secret Project One
 ==================
 
 The point of project one is to get back in to coding after I had spent some time
-away. I want to work on a basic text based game in python.
+away. I want to work on a basic text based game in python
 
 Goals
 -----

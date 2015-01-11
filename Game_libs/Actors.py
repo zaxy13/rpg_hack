@@ -14,11 +14,11 @@ class Actor(object):
         self.attack_points = 10
         self.defence_points = 10
 
-    # return the base attack points, ment to be overridden in Player subclass
+    # return the base attack points, meant to be overridden in Hero subclass
     def attack(self):
         return self.attack_points
 
-    # look in to changing both chances to just luck, then in Player subclass add bonuses.
+    # look in to changing both chances to just luck, then in Hero subclass add bonuses.
     def attack_chance(self):
         luck = random.random() * 100.0
         if luck <= 80.0:
@@ -53,16 +53,16 @@ class Actor(object):
         pass
 
 
-class Player(Actor):
+class Hero(Actor):
     def __init__(self, name):
-        super(Player, self).__init__(name)
+        super(Hero, self).__init__(name)
         self.gold = 100
         self.next_level = 100
         self.weapon = None
         self.armor = None
         # todo, make an item class, to will make objects much neater.
 
-    # todo add auto check ability
+    # todo add auto check ability ## I should be more specific in comments... I assume I mean for levels
 
     def level_up(self, exp_gain):
         self.exp = self.exp + exp_gain
@@ -77,18 +77,16 @@ class Player(Actor):
         else:
             print("you didn't level up")
 
-    def equip_item(self, itemm, kind="pack"):
+    # this need some more thought... I don't like the way this equip system works.
+    def equip_item(self, item):
         if kind != "pack":
             if kind == "weapon":
-                self.weapon = itemm
+                self.weapon = item
             elif kind == "armor":
-                self.armor = itemm
+                self.armor = item
 
         else:
             return "item add fail"
-
-
-
 
 
 class Enemy(Actor):
@@ -98,11 +96,10 @@ class Enemy(Actor):
         self.loot = {}
 
 
-
-
 class NPC(Actor):
     pass
 
+# is this the best place for this? idt may make more sense in the main file
 def emaker(names):
     e = {}
     x = 0
